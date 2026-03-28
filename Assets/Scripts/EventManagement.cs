@@ -1,16 +1,10 @@
+using System;
 using UnityEngine;
 
-public class EventManagement : MonoBehaviour
+public static class EventManagement
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public static Action OnSlingshotAimStarted;
+    public static Action<Vector2, float> OnSlingshotAiming;
+    public static Action<Vector2> OnSlingshotLaunched;
+    public static Action<Vector2> OnSlingshotStopped;
 }
