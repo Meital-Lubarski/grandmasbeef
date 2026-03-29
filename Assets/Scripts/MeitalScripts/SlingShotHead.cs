@@ -9,6 +9,9 @@ public class SlingshotHead : MonoBehaviour
     [SerializeField] private float maxDragDistance = 2.5f;
     [SerializeField] private float launchForceMultiplier = 12f;
 
+    [Header("Camera Bounds")]
+    [SerializeField] private float screenMargin = 0.3f;
+
     [Header("Stop Detection")]
     [SerializeField] private float stopVelocityThreshold = 0.1f;
     [SerializeField] private float stopTimeNeeded = 0.15f;
@@ -32,12 +35,11 @@ public class SlingshotHead : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         objectCollider = GetComponent<Collider2D>();
         mainCamera = Camera.main;
-
         launchStartPosition = transform.position;
-
         rb.gravityScale = 0f;
         rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0f;
+        rb.linearDamping = 3f;
         rb.bodyType = RigidbodyType2D.Kinematic;
     }
 
@@ -47,15 +49,31 @@ public class SlingshotHead : MonoBehaviour
         {
             return;
         }
-
         if (pointerHeld && isDragging)
         {
             Drag();
         }
-
         if (hasLaunched && !stopEventSent)
         {
             CheckIfStopped();
+        }
+    }
+    
+    
+    private void LateUpdate()
+    {
+        if (!hasLaunched || mainCamera == null)
+        {
+            return;
+        }
+
+        Vector2 clampedPosition = ClampPositionToCamera(transform.position);
+
+        if ((Vector2)transform.position != clampedPosition)
+        {
+            transform.position = clampedPosition;
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0f;
         }
     }
 
@@ -73,12 +91,10 @@ public class SlingshotHead : MonoBehaviour
             TryStartDragging();
             return;
         }
-
         if (isDragging)
         {
             Release();
         }
-
         pointerHeld = false;
     }
 
@@ -88,22 +104,17 @@ public class SlingshotHead : MonoBehaviour
         {
             return;
         }
-
         Vector2 mouseWorldPosition = GetPointerWorldPosition();
-
         if (!objectCollider.OverlapPoint(mouseWorldPosition))
         {
             return;
         }
-
         pointerHeld = true;
         isDragging = true;
         currentDragOffset = Vector2.zero;
-
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0f;
-
         EventManagement.OnSlingshotAimStarted?.Invoke();
     }
 
@@ -111,14 +122,11 @@ public class SlingshotHead : MonoBehaviour
     {
         Vector2 pointerWorldPosition = GetPointerWorldPosition();
         Vector2 rawDragVector = pointerWorldPosition - launchStartPosition;
-
         currentDragOffset = GetFourDirectionDrag(rawDragVector);
-
-        transform.position = launchStartPosition + currentDragOffset;
-
+        Vector2 draggedPosition = launchStartPosition + currentDragOffset;
+        transform.position = ClampPositionToCamera(draggedPosition);
         Vector2 launchDirection = (-currentDragOffset).normalized;
         float powerPercent = currentDragOffset.magnitude / maxDragDistance;
-
         EventManagement.OnSlingshotAiming?.Invoke(launchDirection, powerPercent);
     }
 
@@ -128,19 +136,15 @@ public class SlingshotHead : MonoBehaviour
         {
             return Vector2.zero;
         }
-
-        Vector2 snappedDirection;
-
         if (Mathf.Abs(rawDragVector.x) >= Mathf.Abs(rawDragVector.y))
         {
-            snappedDirection = rawDragVector.x >= 0f ? Vector2.right : Vector2.left;
+            Vector2 snappedDirection = rawDragVector.x >= 0f ? Vector2.right : Vector2.left;
             float distance = Mathf.Min(Mathf.Abs(rawDragVector.x), maxDragDistance);
             return snappedDirection * distance;
         }
-
-        snappedDirection = rawDragVector.y >= 0f ? Vector2.up : Vector2.down;
+        Vector2 verticalDirection = rawDragVector.y >= 0f ? Vector2.up : Vector2.down;
         float verticalDistance = Mathf.Min(Mathf.Abs(rawDragVector.y), maxDragDistance);
-        return snappedDirection * verticalDistance;
+        return verticalDirection * verticalDistance;
     }
 
     private void Release()
@@ -150,21 +154,41 @@ public class SlingshotHead : MonoBehaviour
         hasLaunched = true;
         stopEventSent = false;
         stopTimer = 0f;
-
         Launch();
     }
 
     private void Launch()
     {
         Vector2 launchVector = -currentDragOffset;
-
+        if (launchVector == Vector2.zero)
+        {
+            hasLaunched = false;
+            return;
+        }
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0f;
-
         rb.AddForce(launchVector * launchForceMultiplier, ForceMode2D.Impulse);
-
         EventManagement.OnSlingshotLaunched?.Invoke(rb.linearVelocity);
+    }
+    
+
+    private Vector2 ClampPositionToCamera(Vector2 position)
+    {
+        float camHeight = mainCamera.orthographicSize * 2f;
+        float camWidth = camHeight * mainCamera.aspect;
+
+        Vector2 camCenter = mainCamera.transform.position;
+
+        float minX = camCenter.x - camWidth / 2f + screenMargin;
+        float maxX = camCenter.x + camWidth / 2f - screenMargin;
+        float minY = camCenter.y - camHeight / 2f + screenMargin;
+        float maxY = camCenter.y + camHeight / 2f - screenMargin;
+
+        float clampedX = Mathf.Clamp(position.x, minX, maxX);
+        float clampedY = Mathf.Clamp(position.y, minY, maxY);
+
+        return new Vector2(clampedX, clampedY);
     }
 
     private void CheckIfStopped()
@@ -176,6 +200,15 @@ public class SlingshotHead : MonoBehaviour
             if (stopTimer >= stopTimeNeeded)
             {
                 stopEventSent = true;
+
+                rb.linearVelocity = Vector2.zero;
+                rb.angularVelocity = 0f;
+                rb.bodyType = RigidbodyType2D.Kinematic;
+
+                hasLaunched = false;
+                launchStartPosition = transform.position;
+                currentDragOffset = Vector2.zero;
+
                 EventManagement.OnSlingshotStopped?.Invoke(transform.position);
             }
         }
