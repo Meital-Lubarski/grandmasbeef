@@ -122,7 +122,7 @@ public class SlingshotHead : MonoBehaviour
     {
         Vector2 pointerWorldPosition = GetPointerWorldPosition();
         Vector2 rawDragVector = pointerWorldPosition - launchStartPosition;
-        currentDragOffset = GetFourDirectionDrag(rawDragVector);
+        currentDragOffset = GetFreeDrag(rawDragVector);
         Vector2 draggedPosition = launchStartPosition + currentDragOffset;
         transform.position = ClampPositionToCamera(draggedPosition);
         Vector2 launchDirection = (-currentDragOffset).normalized;
@@ -130,21 +130,17 @@ public class SlingshotHead : MonoBehaviour
         EventManagement.OnSlingshotAiming?.Invoke(launchDirection, powerPercent);
     }
 
-    private Vector2 GetFourDirectionDrag(Vector2 rawDragVector)
+    private Vector2 GetFreeDrag(Vector2 rawDragVector)
     {
         if (rawDragVector == Vector2.zero)
         {
             return Vector2.zero;
         }
-        if (Mathf.Abs(rawDragVector.x) >= Mathf.Abs(rawDragVector.y))
+        if (rawDragVector.magnitude > maxDragDistance)
         {
-            Vector2 snappedDirection = rawDragVector.x >= 0f ? Vector2.right : Vector2.left;
-            float distance = Mathf.Min(Mathf.Abs(rawDragVector.x), maxDragDistance);
-            return snappedDirection * distance;
+            return rawDragVector.normalized * maxDragDistance;
         }
-        Vector2 verticalDirection = rawDragVector.y >= 0f ? Vector2.up : Vector2.down;
-        float verticalDistance = Mathf.Min(Mathf.Abs(rawDragVector.y), maxDragDistance);
-        return verticalDirection * verticalDistance;
+        return rawDragVector;
     }
 
     private void Release()
