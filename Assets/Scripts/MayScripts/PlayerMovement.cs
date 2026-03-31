@@ -17,9 +17,6 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _inputActions = new InputSystem_Actions();
-        
-        // כאן קורה הקסם: אנחנו מסננים את הקלט כך שהסקריפט יאזין רק 
-        // למקשים ששויכו ל-Control Scheme שהגדרנו ב-Inspector
         _inputActions.bindingMask = InputBinding.MaskByGroup(controlScheme);
     }
 
