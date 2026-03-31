@@ -8,7 +8,7 @@ public class ShootingHit : MonoBehaviour
         if (hitEffect != null)
         {
             Vector3 hitDirection = transform.up; 
-            EventManagement.OnPlayerHit.Invoke(hitDirection);
+            hitEffect.TakeHit(hitDirection); 
             Destroy(gameObject);
         }
     }

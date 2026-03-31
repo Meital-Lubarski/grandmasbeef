@@ -12,18 +12,13 @@ public class PlayerHitEffect : MonoBehaviour
     private PlayerMovement _playerMovement;
     private bool _isStunned = false;
 
+    private Rigidbody2D _rb;
+    
     private void Awake()
     {
         _playerMovement = GetComponent<PlayerMovement>();
-    }
+        _rb = GetComponent<Rigidbody2D>();
 
-    private void OnEnable()
-    {
-        EventManagement.OnPlayerHit += TakeHit;
-    }
-    private void OnDisable()
-    {
-        EventManagement.OnPlayerHit -= TakeHit;
     }
 
     public void TakeHit(Vector3 knockbackDirection)
@@ -37,19 +32,26 @@ public class PlayerHitEffect : MonoBehaviour
     private IEnumerator HitRoutine(Vector3 knockbackDirection)
     {
         _isStunned = true;
-        _playerMovement.CanMove = false; 
+        _playerMovement.CanMove = false;
 
         float timer = 0f;
 
         while (timer < hitDuration)
         {
-            transform.Rotate(Vector3.forward * (spinSpeed * Time.deltaTime));
-            transform.position += knockbackDirection * (knockbackSpeed * Time.deltaTime);
+            float rotation = spinSpeed * Time.fixedDeltaTime;
+            _rb.MoveRotation(_rb.rotation + rotation);
+
+            Vector2 knockback = (Vector2)knockbackDirection * (knockbackSpeed * Time.fixedDeltaTime);
+            _rb.MovePosition(_rb.position + knockback);
 
             timer += Time.deltaTime;
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
-        _playerMovement.CanMove = true; 
+
+        _rb.linearVelocity = Vector2.zero;
+        _rb.angularVelocity = 0f;
+
+        _playerMovement.CanMove = true;
         _isStunned = false;
     }
 }
