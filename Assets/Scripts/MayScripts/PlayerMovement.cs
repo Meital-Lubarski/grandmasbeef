@@ -13,11 +13,17 @@ public class PlayerMovement : MonoBehaviour
 
     private InputSystem_Actions _inputActions;
     private Vector2 _moveInput;
+    
+    private Rigidbody2D _rb;
+
+    public bool CanMove { get; set; } = true;
 
     private void Awake()
     {
         _inputActions = new InputSystem_Actions();
         _inputActions.bindingMask = InputBinding.MaskByGroup(controlScheme);
+        
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     private void OnEnable()
@@ -40,20 +46,27 @@ public class PlayerMovement : MonoBehaviour
         _moveInput = context.ReadValue<Vector2>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        HandleMovement();
+        _rb.linearVelocity = Vector2.zero;
+        _rb.angularVelocity = 0f;
+        if (CanMove) 
+        {
+            HandleMovement();
+        }
     }
 
     private void HandleMovement()
     {
-        if (_moveInput.y != 0)
-        {
-            transform.Translate(Vector3.up * (_moveInput.y * moveSpeed * Time.deltaTime));
-        }
         if (_moveInput.x != 0)
         {
-            transform.Rotate(Vector3.forward * (-_moveInput.x * rotationSpeed * Time.deltaTime));
+            float rotation = -_moveInput.x * rotationSpeed * Time.fixedDeltaTime;
+            _rb.MoveRotation(_rb.rotation + rotation);
+        }
+        if (_moveInput.y != 0)
+        {
+            Vector2 moveDirection = transform.up * (_moveInput.y * moveSpeed * Time.fixedDeltaTime);
+            _rb.MovePosition(_rb.position + moveDirection);
         }
     }
 }
