@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
 
     private InputSystem_Actions _inputActions;
     private Vector2 _moveInput;
+    
+    public bool CanMove { get; set; } = true;
 
     private void Awake()
     {
@@ -42,7 +44,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        HandleMovement();
+        if (CanMove) 
+        {
+            HandleMovement();
+        }
     }
 
     private void HandleMovement()

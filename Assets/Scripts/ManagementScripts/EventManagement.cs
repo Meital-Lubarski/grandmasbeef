@@ -10,4 +10,7 @@ public abstract class EventManagement : MonoSingleton<EventManagement>
     
     //When the time is up
     public static Action OnTimerComplete;
+    
+    //Event for player getting hit by the bullet
+    public static Action<Vector3> OnPlayerHit;
 }
