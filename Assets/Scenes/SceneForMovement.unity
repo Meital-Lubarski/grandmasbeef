@@ -1620,8 +1620,8 @@ MonoBehaviour:
   controlScheme: Player1
   projectilePrefab: {fileID: 918965486374535790, guid: 95639753c1bd3ad48acf55b6bfd844e6, type: 3}
   shootPoint: {fileID: 1927300810}
-  minLaunchForce: 4
-  maxLaunchForce: 19
+  minLaunchForce: 2
+  maxLaunchForce: 30
   maxChargeTime: 1.5
 --- !u!114 &1037944440
 MonoBehaviour:
