@@ -1594,7 +1594,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: bbbe8d3dc712b9047929e153587d87f2, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1620,7 +1620,7 @@ MonoBehaviour:
   controlScheme: Player1
   projectilePrefab: {fileID: 918965486374535790, guid: 95639753c1bd3ad48acf55b6bfd844e6, type: 3}
   shootPoint: {fileID: 1927300810}
-  minLaunchForce: 10
+  minLaunchForce: 4
   maxLaunchForce: 19
   maxChargeTime: 1.5
 --- !u!114 &1037944440
