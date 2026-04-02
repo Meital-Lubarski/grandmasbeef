@@ -45,10 +45,8 @@ public class Shooting : MonoBehaviour
         {
             return;
         }
-
         _isCharging = true;
         _chargeStartTime = Time.time;
-
         EventManagement.OnSlingshotAimStarted?.Invoke();
     }
 
@@ -65,12 +63,10 @@ public class Shooting : MonoBehaviour
         {
             return;
         }
-
         float heldTime = Time.time - _chargeStartTime;
         float chargePercent = Mathf.Clamp01(heldTime / maxChargeTime);
         float launchForce = Mathf.Lerp(minLaunchForce, maxLaunchForce, chargePercent);
         
-        Debug.Log(" The lunch force is " + launchForce);
         Vector2 shootDirection = transform.up;
 
         EventManagement.OnSlingshotAiming?.Invoke(shootDirection, chargePercent);
