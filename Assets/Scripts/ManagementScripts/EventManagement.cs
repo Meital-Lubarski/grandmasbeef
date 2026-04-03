@@ -12,5 +12,5 @@ public abstract class EventManagement : MonoSingleton<EventManagement>
     public static Action OnTimerComplete;
     
     //Event for player getting hit by the bullet
-    public static Action<Vector3> OnPlayerHit;
+    public static Action<string, Vector3> OnPlayerHit;
 }
