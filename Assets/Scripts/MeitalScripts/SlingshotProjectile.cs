@@ -16,6 +16,9 @@ public class SlingshotProjectile : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        
+        _projectileCollider = GetComponent<Collider2D>();
+        
         _rb.gravityScale = 0f;
         _rb.linearDamping = 0f;
         _rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
