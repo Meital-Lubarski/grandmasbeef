@@ -85,7 +85,9 @@ public class Shooting : MonoBehaviour
 
         if (projectile != null)
         {
-            projectile.Initialize(shootDirection, launchForce, this);
+            Collider2D playerCollider = GetComponent<Collider2D>(); 
+            
+            projectile.Initialize(shootDirection, launchForce, this, playerCollider);
         }
     }
 

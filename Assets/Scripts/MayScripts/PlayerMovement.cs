@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _moveInput;
     
     private Rigidbody2D _rb;
+    
+    public string PlayerId => controlScheme;
 
     public bool CanMove { get; set; } = true;
 
