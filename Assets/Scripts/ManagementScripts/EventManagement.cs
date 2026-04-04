@@ -13,4 +13,6 @@ public abstract class EventManagement : MonoSingleton<EventManagement>
     
     //Event for player getting hit by the bullet
     public static Action<string, Vector3> OnPlayerHit;
+    
+    public static Action<int, int> OnScoreChanged;
 }

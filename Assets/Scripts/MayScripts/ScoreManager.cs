@@ -3,6 +3,8 @@ using UnityEngine.Android;
 
 public class ScoreManager : MonoBehaviour
 {
+    private int _player1Score;
+    private int _player2Score;
     private void OnEnable()
     {
         EventManagement.OnPlayerHit += HandlePlayerHit;
@@ -17,11 +19,17 @@ public class ScoreManager : MonoBehaviour
     {
         if (hitPlayerId == "Player1")
         {
-            //TODO: point for player 2 or minus life for player 1
+            _player2Score++;
         }
         else if (hitPlayerId == "Player2")
         {
-            //TODO: point for player 1 or minus life for player 2
+            _player1Score++;
         }
+        NotifyScoreChanged();
+    }
+    
+    private void NotifyScoreChanged()
+    {
+        EventManagement.OnScoreChanged?.Invoke(_player1Score, _player2Score);
     }
 }
