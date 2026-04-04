@@ -32,4 +32,8 @@ public class CountdownTimer : MonoBehaviour
             }
         }
     }
+    public float GetTimeRemaining()
+    {
+        return timeRemaining;
+    }
 }
