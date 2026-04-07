@@ -4,25 +4,15 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    private void Awake()
+
+    private void PauseTimeScale()
     {
-        EventManagement.MoveToOpenScreen?.Invoke();
+        Time.timeScale = 0f;
     }
 
-    public void RestartCurrentScene()
+    private void ContinueTimeScale()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.buildIndex);
-    }
-
-    public void StartGame()
-    {
-        EventManagement.OnGameStarted?.Invoke();
-    }
-
-    public static void GameOver()
-    {
-        EventManagement.OnGameOver?.Invoke();
+        Time.timeScale = 1f;
     }
 
     public static void QuitGame()

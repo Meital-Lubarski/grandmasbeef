@@ -18,7 +18,10 @@ public abstract class EventManagement : MonoSingleton<EventManagement>
     public static Action<int, int> OnScoreChanged;
     
     // UI events
-    public static Action MoveToOpenScreen;
-    public static Action OnGameStarted;
-    public static Action OnGameOver;
+    public static Action SwitchToStartScreen;
+    public static Action SwitchToNamePickScreen;
+    public static Action SwitchToPauseScreen;
+    public static Action SwitchToGameOverScreen;
+    public static Action SwitchToGameScreen;
+
 }

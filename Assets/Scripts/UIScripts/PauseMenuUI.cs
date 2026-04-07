@@ -2,43 +2,33 @@ using UnityEngine;
 
 public class PauseMenuUI : MonoBehaviour
 {
-    [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject pauseMenuCanvas;
 
-    private bool _isPaused = false;
-
-    private void Start()
+    private void OnEnable()
     {
-        pausePanel.SetActive(false);
+        EventManagement.SwitchToGameOverScreen += TurnPauseOff;
+        EventManagement.SwitchToStartScreen += TurnPauseOff;
+        EventManagement.SwitchToGameScreen += TurnPauseOff;
+        EventManagement.SwitchToNamePickScreen += TurnPauseOff;
+        EventManagement.SwitchToPauseScreen += TurnPauseOn;
     }
 
-    public void OnPause()
+    private void OnDisable()
     {
-        TogglePause();
+        EventManagement.SwitchToGameOverScreen -= TurnPauseOff;
+        EventManagement.SwitchToStartScreen -= TurnPauseOff;
+        EventManagement.SwitchToGameScreen -= TurnPauseOff;
+        EventManagement.SwitchToNamePickScreen -= TurnPauseOff;
+        EventManagement.SwitchToPauseScreen -= TurnPauseOn;
     }
 
-    private void TogglePause()
+    private void TurnPauseOff()
     {
-        _isPaused = !_isPaused;
-
-        pausePanel.SetActive(_isPaused);
-        Time.timeScale = _isPaused ? 0f : 1f;
+        pauseMenuCanvas.SetActive(false);
     }
 
-    public void OnResumePressed()
+    private void TurnPauseOn()
     {
-        _isPaused = false;
-        pausePanel.SetActive(false);
-        Time.timeScale = 1f;
-    }
-
-    public void OnRestartPressed()
-    {
-        Time.timeScale = 1f;
-        GameManager.Instance.RestartCurrentScene();
-    }
-
-    public void OnExitPressed()
-    {
-        GameManager.QuitGame();
+        pauseMenuCanvas.SetActive(true);
     }
 }

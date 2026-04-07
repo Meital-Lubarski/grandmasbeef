@@ -2,33 +2,33 @@ using UnityEngine;
 
 public class StartScreenUI : MonoBehaviour
 {
-    [SerializeField] private GameObject startCanvas;
-    [SerializeField] private GameObject playerChooseCanvas;
-    
+    [SerializeField] private GameObject startScreenCanvas;
+
     private void OnEnable()
     {
-        EventManagement.OnGameStarted += HandleGameStarted;
+        EventManagement.SwitchToGameOverScreen += TurnStartScreenOff;
+        EventManagement.SwitchToStartScreen += TurnStartScreenOn;
+        EventManagement.SwitchToGameScreen += TurnStartScreenOff;
+        EventManagement.SwitchToNamePickScreen += TurnStartScreenOff;
+        EventManagement.SwitchToPauseScreen += TurnStartScreenOff;
     }
 
     private void OnDisable()
     {
-        EventManagement.OnGameStarted -= HandleGameStarted;
+        EventManagement.SwitchToGameOverScreen -= TurnStartScreenOff;
+        EventManagement.SwitchToStartScreen -= TurnStartScreenOn;
+        EventManagement.SwitchToGameScreen -= TurnStartScreenOff;
+        EventManagement.SwitchToNamePickScreen -= TurnStartScreenOff;
+        EventManagement.SwitchToPauseScreen -= TurnStartScreenOff;
     }
 
-    private void ShowStartPanel()
+    private void TurnStartScreenOff()
     {
-        startCanvas.SetActive(true);
-        Time.timeScale = 0f;
+        startScreenCanvas.SetActive(false);
     }
 
-    private void HandleGameStarted()
+    private void TurnStartScreenOn()
     {
-        startCanvas.SetActive(false);
-        Time.timeScale = 1f;
-    }
-
-    public void OnStartPressed()
-    {
-        GameManager.Instance.StartGame();
+        startScreenCanvas.SetActive(true);
     }
 }
