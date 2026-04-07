@@ -1,8 +1,14 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+    private void Awake()
+    {
+        EventManagement.MoveToOpenScreen?.Invoke();
+    }
+
     public void RestartCurrentScene()
     {
         Scene currentScene = SceneManager.GetActiveScene();

@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class StartScreenUI : MonoBehaviour
 {
-    [SerializeField] private GameObject startPanel;
-
+    [SerializeField] private GameObject startCanvas;
+    [SerializeField] private GameObject playerChooseCanvas;
+    
     private void OnEnable()
     {
         EventManagement.OnGameStarted += HandleGameStarted;
@@ -14,25 +15,20 @@ public class StartScreenUI : MonoBehaviour
         EventManagement.OnGameStarted -= HandleGameStarted;
     }
 
-    private void Start()
+    private void ShowStartPanel()
     {
-        startPanel.SetActive(true);
+        startCanvas.SetActive(true);
         Time.timeScale = 0f;
     }
 
     private void HandleGameStarted()
     {
-        startPanel.SetActive(false);
+        startCanvas.SetActive(false);
         Time.timeScale = 1f;
     }
 
     public void OnStartPressed()
     {
         GameManager.Instance.StartGame();
-    }
-
-    public void OnQuitPressed()
-    {
-        GameManager.QuitGame();
     }
 }

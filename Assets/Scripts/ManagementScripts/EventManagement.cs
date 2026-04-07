@@ -17,7 +17,8 @@ public abstract class EventManagement : MonoSingleton<EventManagement>
     // Score changed
     public static Action<int, int> OnScoreChanged;
     
-    // Game state events
+    // UI events
+    public static Action MoveToOpenScreen;
     public static Action OnGameStarted;
     public static Action OnGameOver;
 }
