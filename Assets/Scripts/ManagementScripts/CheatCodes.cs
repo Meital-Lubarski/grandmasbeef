@@ -21,7 +21,7 @@ public class CheatCodes : MonoBehaviour
     }
     private void ExitGame(InputAction.CallbackContext context)
     {
-        GameManager.GameOver();
+        GameManager.QuitGame();
     }
 
     private void RestartGame(InputAction.CallbackContext context)
