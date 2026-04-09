@@ -5,6 +5,10 @@ public class ScoreManager : MonoBehaviour
 {
     private int _player1Score;
     private int _player2Score;
+    
+    public int Player1Score => _player1Score;
+    public int Player2Score => _player2Score;
+    
     private void OnEnable()
     {
         EventManagement.OnPlayerHit += HandlePlayerHit;

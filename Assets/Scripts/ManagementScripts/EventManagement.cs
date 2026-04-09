@@ -8,14 +8,15 @@ public abstract class EventManagement : MonoSingleton<EventManagement>
     public static Action<Vector2> OnSlingshotLaunched;
     public static Action<Vector2> OnSlingshotStopped;
     
-    //When the time is up
-    public static Action OnTimerComplete;
-    
     //Event for player getting hit by the bullet
     public static Action<string, Vector3> OnPlayerHit;
     
     // Score changed
     public static Action<int, int> OnScoreChanged;
+    
+    //Time management
+    public static System.Action OnTimerComplete;
+    public static System.Action<string> OnGameEndedWithWinner;
     
     // UI events
     public static Action SwitchToStartScreen;

@@ -6,9 +6,19 @@ public class CountdownTimer : MonoBehaviour
     [Tooltip("Starting time in seconds (120 seconds = 2 minutes)")]
     [SerializeField] private float timeRemaining = 120f;
     [SerializeField] private bool timerIsRunning = false;
-    private void Start()
+    
+    private void OnEnable()
     {
-        // Start the timer as soon as the object loads
+        EventManagement.SwitchToGameScreen += StartTimer;
+    }
+
+    private void OnDisable()
+    {
+        EventManagement.SwitchToGameScreen -= StartTimer;
+    }
+    
+    private void StartTimer()
+    {
         timerIsRunning = true;
     }
 
@@ -28,7 +38,7 @@ public class CountdownTimer : MonoBehaviour
                 timerIsRunning = false;
                 
                 // Trigger whatever events are hooked up in the Inspector
-                EventManagement.OnTimerComplete.Invoke();
+                EventManagement.OnTimerComplete?.Invoke();
             }
         }
     }
