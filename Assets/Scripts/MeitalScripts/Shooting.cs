@@ -41,6 +41,11 @@ public class Shooting : MonoBehaviour
 
     private void OnShootStarted(InputAction.CallbackContext context)
     {
+        //Checking for ammo available
+        if (!AmmoManager.Instance.CanPlayerShoot(controlScheme))
+        {
+            return;
+        }
         if (_currentProjectile != null)
         {
             return;
@@ -73,7 +78,9 @@ public class Shooting : MonoBehaviour
 
         GameObject projectileObject =
             Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity);
-
+        
+        EventManagement.OnPlayerShot?.Invoke(controlScheme);
+        
         _currentProjectile = projectileObject;
 
         SlingshotProjectile projectile =
