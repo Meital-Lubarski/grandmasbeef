@@ -155,10 +155,10 @@ TextureImporter:
       name: player1_mini_0
       rect:
         serializedVersion: 2
-        x: 239
-        y: 1434
-        width: 72
-        height: 75
+        x: 411
+        y: 239
+        width: 75
+        height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
