@@ -2,37 +2,33 @@ using UnityEngine;
 
 public class GameOverScreenUI : MonoBehaviour
 {
-    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject gameOverCanvas;
 
     private void OnEnable()
     {
-        EventManagement.OnGameOver += HandleGameOver;
+        EventManagement.SwitchToGameOverScreen += TurnGameOverOn;
+        EventManagement.SwitchToStartScreen += TurnGameOverOff;
+        EventManagement.SwitchToGameScreen += TurnGameOverOff;
+        EventManagement.SwitchToNamePickScreen += TurnGameOverOff;
+        EventManagement.SwitchToPauseScreen += TurnGameOverOff;
     }
 
     private void OnDisable()
     {
-        EventManagement.OnGameOver -= HandleGameOver;
+        EventManagement.SwitchToGameOverScreen -= TurnGameOverOn;
+        EventManagement.SwitchToStartScreen -= TurnGameOverOff;
+        EventManagement.SwitchToGameScreen -= TurnGameOverOff;
+        EventManagement.SwitchToNamePickScreen -= TurnGameOverOff;
+        EventManagement.SwitchToPauseScreen -= TurnGameOverOff;
     }
 
-    private void Start()
+    private void TurnGameOverOff()
     {
-        gameOverPanel.SetActive(false);
+        gameOverCanvas.SetActive(false);
     }
 
-    private void HandleGameOver()
+    private void TurnGameOverOn()
     {
-        gameOverPanel.SetActive(true);
-        Time.timeScale = 0f;
-    }
-
-    public void OnRestartPressed()
-    {
-        Time.timeScale = 1f;
-        GameManager.Instance.RestartCurrentScene();
-    }
-
-    public void OnQuitPressed()
-    {
-        GameManager.QuitGame();
+        gameOverCanvas.SetActive(true);
     }
 }
