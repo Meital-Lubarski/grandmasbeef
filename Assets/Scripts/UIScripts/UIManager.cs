@@ -49,7 +49,15 @@ public class UIManager : MonoBehaviour
     // --- מסך Game Over ---
     public void OnRestartPressed()
     {
-        GameManager.Instance.RestartCurrentScene();
+        if (MapManager.Instance.HasMoreRounds())
+        {
+            MapManager.Instance.AdvanceToNextRound();
+            EventManagement.SwitchToGameScreen?.Invoke();
+        }
+        else
+        {
+            GameManager.Instance.RestartCurrentScene();
+        }
     }
 
     // --- כללי ---
