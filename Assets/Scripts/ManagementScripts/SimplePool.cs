@@ -21,7 +21,7 @@ public class SimplePool<T> : MonoSingleton<SimplePool<T>> where T: MonoBehaviour
         pooledObject.gameObject.SetActive(true);
 
         // C# Knows this object implements IPoolable!
-        pooledObject.Reset();
+        pooledObject.ResetPooledSound();
 
         if (_available.Count < 1)
         {

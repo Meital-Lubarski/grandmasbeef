@@ -5,13 +5,16 @@ public class SoundManager : MonoSingleton<SoundManager>
     [SerializeField] private AudioSource uiAudioSource;
     [SerializeField] private AudioSource musicAudioSource;
 
+    public AudioSource MusicAudioSource => musicAudioSource;
+
     public void PlayPooledSound(AudioClip clip, Vector3 position, float volume = 1f)
     {
         if (clip == null)
         {
             return;
         }
-        PooledSound pooledSound = SimplePool<PooledSound>.Instance.Get();
+
+        PooledSound pooledSound = PooledSoundPool.Instance.Get();
         pooledSound.Play(clip, position, volume);
     }
 
@@ -26,6 +29,7 @@ public class SoundManager : MonoSingleton<SoundManager>
         {
             return;
         }
+
         uiAudioSource.PlayOneShot(clip, volume);
     }
 
@@ -35,6 +39,7 @@ public class SoundManager : MonoSingleton<SoundManager>
         {
             return;
         }
+
         musicAudioSource.clip = clip;
         musicAudioSource.loop = loop;
         musicAudioSource.volume = volume;
@@ -47,6 +52,7 @@ public class SoundManager : MonoSingleton<SoundManager>
         {
             return;
         }
+
         musicAudioSource.Stop();
     }
 }

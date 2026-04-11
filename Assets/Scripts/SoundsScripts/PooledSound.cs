@@ -11,7 +11,7 @@ public class PooledSound : MonoBehaviour, IPoolable
         _audioSource = GetComponent<AudioSource>();
     }
 
-    public void Reset()
+    public void ResetPooledSound()
     {
         StopAllCoroutines();
         _audioSource.Stop();

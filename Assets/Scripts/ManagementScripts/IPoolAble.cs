@@ -1,4 +1,4 @@
 public interface IPoolable
 {
-    public void Reset();
+    void ResetPooledSound();
 }
