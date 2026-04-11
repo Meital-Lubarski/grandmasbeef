@@ -14,7 +14,15 @@ public class UIManager : MonoBehaviour
 
     private void OnTimerComplete()
     {
-        EventManagement.SwitchToGameOverScreen?.Invoke();
+        if (MapManager.Instance.HasMoreRounds())
+        {
+            MapManager.Instance.AdvanceToNextRound();
+            EventManagement.SwitchToGameScreen?.Invoke();
+        }
+        else
+        {
+            GameManager.Instance.HandleFinalGameEnd();
+        }
     }
 
     // --- מסך התחלה ---
@@ -26,6 +34,7 @@ public class UIManager : MonoBehaviour
     // --- מסך בחירת שמות ---
     public void OnNamePickStartBattlePressed()
     {
+        MapManager.Instance.StartNewMatch();
         EventManagement.SwitchToGameScreen?.Invoke();
     }
 
@@ -49,15 +58,7 @@ public class UIManager : MonoBehaviour
     // --- מסך Game Over ---
     public void OnRestartPressed()
     {
-        if (MapManager.Instance.HasMoreRounds())
-        {
-            MapManager.Instance.AdvanceToNextRound();
-            EventManagement.SwitchToGameScreen?.Invoke();
-        }
-        else
-        {
-            GameManager.Instance.RestartCurrentScene();
-        }
+        GameManager.Instance.RestartCurrentScene();
     }
 
     // --- כללי ---
