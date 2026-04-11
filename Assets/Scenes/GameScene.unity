@@ -6320,7 +6320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea620a4dc26b4cac8060964dc339d05d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmmoManager
-  maxAmmoPerRound: 2
+  maxAmmoPerRound: 6
 --- !u!1 &1135677512
 GameObject:
   m_ObjectHideFlags: 0
