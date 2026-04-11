@@ -61,9 +61,7 @@ public class Shooting : MonoBehaviour
         {
             return;
         }
-
         _isCharging = false;
-
         if (_currentProjectile != null)
         {
             return;
@@ -71,25 +69,18 @@ public class Shooting : MonoBehaviour
         float heldTime = Time.time - _chargeStartTime;
         float chargePercent = Mathf.Clamp01(heldTime / maxChargeTime);
         float launchForce = Mathf.Lerp(minLaunchForce, maxLaunchForce, chargePercent);
-        
         Vector2 shootDirection = transform.up;
-
         EventManagement.OnSlingshotAiming?.Invoke(shootDirection, chargePercent);
-
         GameObject projectileObject =
             Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity);
-        
+        EventManagement.OnProjectileSpawned?.Invoke();
         EventManagement.OnPlayerShot?.Invoke(controlScheme);
-        
         _currentProjectile = projectileObject;
-
         SlingshotProjectile projectile =
             projectileObject.GetComponent<SlingshotProjectile>();
-
         if (projectile != null)
         {
             Collider2D playerCollider = GetComponent<Collider2D>(); 
-            
             projectile.Initialize(shootDirection, launchForce, this, playerCollider);
         }
     }

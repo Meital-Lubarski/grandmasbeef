@@ -52,6 +52,7 @@ public class SlingshotProjectile : MonoBehaviour
 
     private void OnDestroy()
     {
+        EventManagement.OnProjectileResolved?.Invoke(); 
         if (_owner != null)
         {
             _owner.NotifyProjectileDestroyed();
