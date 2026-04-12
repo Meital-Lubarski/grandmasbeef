@@ -4,7 +4,16 @@ using UnityEngine;
 public class GameOverWinnerTextUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text winnerText;
-
+    
+    private string _player1Name;
+    private string _player2Name;
+    
+    private void Start()
+    {
+        _player1Name = PlayerPrefs.GetString("Player1Name", "Player 1");
+        _player2Name = PlayerPrefs.GetString("Player2Name", "Player 2");
+    }
+    
     private void OnEnable()
     {
         EventManagement.OnGameEndedWithWinner += UpdateWinnerText;
@@ -17,21 +26,15 @@ public class GameOverWinnerTextUI : MonoBehaviour
 
     private void UpdateWinnerText(string winnerId)
     {
-        Debug.Log("Winner event received: " + winnerId);
-
-        if (winnerText == null)
-        {
-            Debug.Log("winnerText is null");
-            return;
-        }
+        if (winnerText == null) return;
 
         if (winnerId == "Player1")
         {
-            winnerText.text = "Player 1 Wins!";
+            winnerText.text = $"{_player1Name} Wins!";
         }
         else if (winnerId == "Player2")
         {
-            winnerText.text = "Player 2 Wins!";
+            winnerText.text = $"{_player2Name} Wins!";
         }
         else
         {
