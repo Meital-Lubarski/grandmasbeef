@@ -69,6 +69,7 @@ public class Shooting : MonoBehaviour
         float heldTime = Time.time - _chargeStartTime;
         float chargePercent = Mathf.Clamp01(heldTime / maxChargeTime);
         float launchForce = Mathf.Lerp(minLaunchForce, maxLaunchForce, chargePercent);
+        Debug.Log("shooting in force " + launchForce);
         Vector2 shootDirection = transform.up;
         EventManagement.OnSlingshotAiming?.Invoke(shootDirection, chargePercent);
         GameObject projectileObject =
