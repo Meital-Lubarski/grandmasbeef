@@ -830,7 +830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1baac3cae90a0404792d91ce7377f3c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CountdownTimer
-  roundDuration: 3
+  roundDuration: 20
 --- !u!4 &133112040
 Transform:
   m_ObjectHideFlags: 0
@@ -2859,17 +2859,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 400414441}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1186226604}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 365, y: 20}
-  m_SizeDelta: {x: 536, y: 361}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 361, y: 537}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &400414443
 MonoBehaviour:
@@ -2891,7 +2891,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4020408549103017536, guid: 97582ae8a62e8be46b4ddf1d26b153ca, type: 3}
+  m_Sprite: {fileID: 5824779596174678253, guid: 4df2aee6f38997d45848f0ada70f3ede, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5447,7 +5447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   controlScheme: Player1
-  moveSpeed: 5
+  moveSpeed: 2
   rotationSpeed: 200
 --- !u!212 &865022830
 SpriteRenderer:
@@ -5542,7 +5542,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &873133770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10555,7 +10555,7 @@ MonoBehaviour:
   shootPoint: {fileID: 1597001048}
   minLaunchForce: 2
   maxLaunchForce: 30
-  maxChargeTime: 1.5
+  maxChargeTime: 5
 --- !u!114 &1751605931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10569,7 +10569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   controlScheme: Player2
-  moveSpeed: 5
+  moveSpeed: 2
   rotationSpeed: 200
 --- !u!212 &1751605932
 SpriteRenderer:
@@ -11420,17 +11420,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1868288526}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1186226604}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 550}
-  m_SizeDelta: {x: 533, y: 352}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 352, y: 532}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1868288528
 MonoBehaviour:
@@ -11452,7 +11452,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6086511814804855057, guid: afc4f97e69b47b14099ea7f22157c5f9, type: 3}
+  m_Sprite: {fileID: -4571003310310924838, guid: f921c6b59fd421347be2b476930d64c6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
