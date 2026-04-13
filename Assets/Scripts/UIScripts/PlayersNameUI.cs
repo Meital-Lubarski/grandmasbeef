@@ -1,30 +1,33 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 //Class for saving the names of the players in the game
 public class PlayersNameUI : MonoBehaviour
 {
-    public TMP_InputField nameInputField;
-
+    [SerializeField] private string defaultPlayer1Name = "Player 1";
+    [SerializeField] private string defaultPlayer2Name = "Player 2";
+    
+    
+    [SerializeField] private TMP_InputField player1InputField;
+    [SerializeField] private TMP_InputField player2InputField;
+    
     void Start()
     {
-        // כשהמשחק מתחיל, נבדוק אם כבר שמרנו שם בעבר
-        if (PlayerPrefs.HasKey("PlayerName"))
-        {
-            // אם כן, נטען אותו ונציג אותו בתיבת הטקסט
-            nameInputField.text = PlayerPrefs.GetString("PlayerName");
-        }
+        player1InputField.text = PlayerPrefs.GetString("Player1Name", "Player 1");
+        player2InputField.text = PlayerPrefs.GetString("Player2Name", "Player 2");
     }
 
-    // פונקציה שתופעל כשהשחקן ילחץ על כפתור השמירה
     public void SavePlayerName()
     {
-        // שומרים את הטקסט שנכתב בתיבה לתוך PlayerPrefs תחת המפתח "PlayerName"
-        PlayerPrefs.SetString("PlayerName", nameInputField.text);
+        string p1Name = string.IsNullOrWhiteSpace(player1InputField.text) ? defaultPlayer1Name : player1InputField.text;
+        string p2Name = string.IsNullOrWhiteSpace(player2InputField.text) ? defaultPlayer2Name : player2InputField.text;
+
+        PlayerPrefs.SetString("Player1Name", p1Name);
+        PlayerPrefs.SetString("Player2Name", p2Name);
         
-        // שומרים פיזית את הנתונים כדי להבטיח שלא יאבדו
         PlayerPrefs.Save(); 
         
-        Debug.Log("השם נשמר בהצלחה: " + nameInputField.text);
+        Debug.Log($"The names has been saved: {p1Name} against {p2Name}");
     }
 }
