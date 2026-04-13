@@ -5331,7 +5331,7 @@ GameObject:
   - component: {fileID: 865022826}
   - component: {fileID: 865022825}
   - component: {fileID: 865022832}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5417,9 +5417,9 @@ MonoBehaviour:
   controlScheme: Player1
   projectilePrefab: {fileID: 918965486374535790, guid: 95639753c1bd3ad48acf55b6bfd844e6, type: 3}
   shootPoint: {fileID: 1427976283}
-  minLaunchForce: 2
-  maxLaunchForce: 30
-  maxChargeTime: 1.5
+  minLaunchForce: 1.1
+  maxLaunchForce: 15
+  maxChargeTime: 5
 --- !u!114 &865022828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5541,8 +5541,9 @@ MonoBehaviour:
   maxAimDistance: 5
   collisionLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 72
   maxBounces: 3
+  projectileRadius: 0.1
 --- !u!1 &873133769
 GameObject:
   m_ObjectHideFlags: 0
@@ -8500,7 +8501,7 @@ LineRenderer:
       m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 0
+    numCornerVertices: 4
     numCapVertices: 0
     alignment: 0
     textureMode: 1
@@ -10622,7 +10623,7 @@ GameObject:
   - component: {fileID: 1751605929}
   - component: {fileID: 1751605928}
   - component: {fileID: 1751605934}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

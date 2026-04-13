@@ -10,6 +10,9 @@ public class AimLineController : MonoBehaviour
     [SerializeField] private LayerMask collisionLayers;
     [SerializeField] private int maxBounces = 3; // מגביל את כמות השבירות כדי למנוע קריסה (לולאה אינסופית)
 
+    [Tooltip("Match this to your projectile's Collider radius")]
+    [SerializeField] private float projectileRadius = 0.25f;
+    
     private Shooting _shooting;
     private Collider2D _myCollider; 
 
@@ -53,7 +56,7 @@ public class AimLineController : MonoBehaviour
             // כאן הקסם של השחקן: בירייה הראשונה נתעלם ממנו, אבל אחרי שבירה (i > 0) נאפשר פגיעה בו
             Collider2D colliderToIgnore = (i == 0) ? _myCollider : null;
 
-            RaycastHit2D[] hits = Physics2D.RaycastAll(currentPosition, currentDirection, remainingDistance, collisionLayers);
+            RaycastHit2D[] hits = Physics2D.CircleCastAll(currentPosition, projectileRadius, currentDirection, remainingDistance, collisionLayers);
             
             RaycastHit2D validHit = new RaycastHit2D();
             float closestDistance = float.MaxValue;
@@ -107,7 +110,7 @@ public class AimLineController : MonoBehaviour
         // מעדכנים את ה-Line Renderer עם כמות הנקודות והמיקומים שלהן
         lineRenderer.positionCount = linePoints.Count;
         lineRenderer.SetPositions(linePoints.ToArray());
-
+/*
         // שומרים על קווקווים אחידים לאורך כל הקו השבור
         if (lineRenderer.material != null)
         {
@@ -118,6 +121,6 @@ public class AimLineController : MonoBehaviour
             }
             // המספר 2f הוא מקדם הצפיפות של הקווקווים - תשחקי איתו כדי להגיע למראה מושלם
             lineRenderer.material.mainTextureScale = new Vector2(totalDistance * 2f, 1);
-        }
+        }*/
     }
 }
