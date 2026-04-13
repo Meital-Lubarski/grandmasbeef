@@ -30,11 +30,11 @@ public class GameOverWinnerTextUI : MonoBehaviour
 
         if (winnerId == "Player1")
         {
-            winnerText.text = $"{_player1Name} Wins!";
+            winnerText.text = _player1Name + " Wins!";
         }
         else if (winnerId == "Player2")
         {
-            winnerText.text = $"{_player2Name} Wins!";
+            winnerText.text = _player2Name + " Wins!";
         }
         else
         {

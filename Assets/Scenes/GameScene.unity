@@ -675,7 +675,6 @@ GameObject:
   - component: {fileID: 130530630}
   - component: {fileID: 130530632}
   - component: {fileID: 130530631}
-  - component: {fileID: 130530633}
   m_Layer: 5
   m_Name: GameHeadline_EndScreen
   m_TagString: Untagged
@@ -802,19 +801,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130530629}
   m_CullTransparentMesh: 1
---- !u!114 &130530633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 130530629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f91532c2f8914da4c96d78d57aaea815, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameOverWinnerTextUI
-  winnerText: {fileID: 130530631}
 --- !u!1 &133112038
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,7 +830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1baac3cae90a0404792d91ce7377f3c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CountdownTimer
-  roundDuration: 10
+  roundDuration: 3
 --- !u!4 &133112040
 Transform:
   m_ObjectHideFlags: 0
@@ -5801,7 +5787,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &874180838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11904,6 +11890,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1974541498}
   - component: {fileID: 1974541499}
+  - component: {fileID: 1974541501}
+  - component: {fileID: 1974541500}
   m_Layer: 0
   m_Name: PlayerNameUI
   m_TagString: Untagged
@@ -11942,6 +11930,33 @@ MonoBehaviour:
   defaultPlayer2Name: Malka
   player1InputField: {fileID: 1450619047}
   player2InputField: {fileID: 1306838494}
+--- !u!114 &1974541500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974541497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96606d457dbcc44c8f325cd0eb6f775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScoreUI
+  player1ScoreText: {fileID: 1603166474}
+  player2ScoreText: {fileID: 605203157}
+--- !u!114 &1974541501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974541497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f91532c2f8914da4c96d78d57aaea815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameOverWinnerTextUI
+  winnerText: {fileID: 130530631}
 --- !u!1 &1977759400
 GameObject:
   m_ObjectHideFlags: 0
