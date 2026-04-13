@@ -18,6 +18,9 @@ public class Shooting : MonoBehaviour
     private float _chargeStartTime;
     private bool _isCharging;
     private GameObject _currentProjectile;
+    
+    public bool IsCharging => _isCharging;
+    public Transform ShootPoint => shootPoint;
 
     private void Awake()
     {
