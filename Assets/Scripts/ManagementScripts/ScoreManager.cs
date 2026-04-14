@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ScoreManager : MonoBehaviour
+public class ScoreManager : MonoSingleton<ScoreManager>
 {
     [Header("Game Settings")]
     public int hitsToWinRound = 6;

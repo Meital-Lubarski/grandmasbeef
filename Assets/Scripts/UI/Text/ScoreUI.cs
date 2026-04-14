@@ -34,7 +34,7 @@ public class ScoreUI : MonoBehaviour
         if (_scoreManager == null) return;
 
         // מציג: שם שחקן | ניצחונות במפות: X | פגיעות בסיבוב: Y/6
-        player1ScoreText.text = $"{_player1Name}\nMaps Won: {_scoreManager.Player1MapWins}/2\nHits: {player1Hits}/6";
-        player2ScoreText.text = $"{_player2Name}\nMaps Won: {_scoreManager.Player2MapWins}/2\nHits: {player2Hits}/6";
+        player1ScoreText.text = $"{_player1Name}\nMaps Won: {ScoreManager.Instance.Player1MapWins}/2\nHits: {player1Hits}/6";
+        player2ScoreText.text = $"{_player2Name}\nMaps Won: {ScoreManager.Instance.Player2MapWins}/2\nHits: {player2Hits}/6";
     }
 }
