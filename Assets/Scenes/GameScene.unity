@@ -2803,6 +2803,7 @@ GameObject:
   - component: {fileID: 400414442}
   - component: {fileID: 400414444}
   - component: {fileID: 400414443}
+  - component: {fileID: 400414445}
   m_Layer: 5
   m_Name: GrandmaUIPlayer1
   m_TagString: Untagged
@@ -2867,6 +2868,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 400414441}
   m_CullTransparentMesh: 1
+--- !u!114 &400414445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400414441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c28b18127176d54bb624a3879136754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PortraitChange
+  selectedPlayer: 0
+  displayImage: {fileID: 400414443}
+  sprites:
+  - {fileID: 5824779596174678253, guid: 4df2aee6f38997d45848f0ada70f3ede, type: 3}
+  - {fileID: 4992629739972525047, guid: 2735f25cbfebb484abaedfb25b013f8a, type: 3}
+  - {fileID: 2271786417181807074, guid: 1c60dea2871bdbe43ace0c15c0be8e65, type: 3}
+  - {fileID: 826738446791825311, guid: c355d4f73a152044c8cb3203db048331, type: 3}
+  - {fileID: 5991465690582618504, guid: e0950324a3239eb4596398a6ea70be2c, type: 3}
+  - {fileID: -3535946641264916402, guid: 4aa637b96f9759d4ab44d4a7b4fd432e, type: 3}
+  initialIndex: 0
 --- !u!1 &434115644
 GameObject:
   m_ObjectHideFlags: 0
@@ -7383,7 +7406,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1186226601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11778,6 +11801,7 @@ GameObject:
   - component: {fileID: 1868288527}
   - component: {fileID: 1868288529}
   - component: {fileID: 1868288528}
+  - component: {fileID: 1868288530}
   m_Layer: 5
   m_Name: GrandmaUIPlayer2
   m_TagString: Untagged
@@ -11842,6 +11866,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1868288526}
   m_CullTransparentMesh: 1
+--- !u!114 &1868288530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1868288526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c28b18127176d54bb624a3879136754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PortraitChange
+  selectedPlayer: 1
+  displayImage: {fileID: 1868288528}
+  sprites:
+  - {fileID: -4571003310310924838, guid: f921c6b59fd421347be2b476930d64c6, type: 3}
+  - {fileID: -7297038747703189762, guid: d443d0e1d479f444cb1f4f4beaeb35df, type: 3}
+  - {fileID: 6760205879886332230, guid: 2aca6d58d54f246468209f1c2e39ba90, type: 3}
+  - {fileID: 6688032582190813581, guid: d8dc20081e5796f41b88e102bc570622, type: 3}
+  - {fileID: -1027651395655139436, guid: 038852884af4da544b87eaec30f23a13, type: 3}
+  - {fileID: -95452167186448387, guid: 99887b43211b2ff4c947f2afd87e1fc1, type: 3}
+  initialIndex: 0
 --- !u!1 &1888584000
 GameObject:
   m_ObjectHideFlags: 0
