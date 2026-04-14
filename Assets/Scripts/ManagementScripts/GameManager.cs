@@ -3,9 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    [Header("References")]
-    [SerializeField] private ScoreManager scoreManager;
-
     private void Start()
     {
         EventManagement.SwitchToStartScreen?.Invoke();
@@ -37,27 +34,6 @@ public class GameManager : MonoSingleton<GameManager>
     private void ContinueTimeScale()
     {
         Time.timeScale = 1f;
-    }
-
-    public void HandleFinalGameEnd()
-    {
-        string winnerMessage;
-
-        if (scoreManager.Player1Score > scoreManager.Player2Score)
-        {
-            winnerMessage = "Player 1 Wins!";
-        }
-        else if (scoreManager.Player2Score > scoreManager.Player1Score)
-        {
-            winnerMessage = "Player 2 Wins!";
-        }
-        else
-        {
-            winnerMessage = "It's a Tie!";
-        }
-
-        EventManagement.OnGameEndedWithWinner?.Invoke(winnerMessage);
-        EventManagement.SwitchToGameOverScreen?.Invoke();
     }
 
     public void RestartCurrentScene()

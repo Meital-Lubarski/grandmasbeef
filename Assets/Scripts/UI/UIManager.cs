@@ -4,25 +4,27 @@ public class UIManager : MonoBehaviour
 {
     private void OnEnable()
     {
-        EventManagement.OnTimerComplete += OnTimerComplete;
+        EventManagement.OnRoundComplete += HandleRoundComplete;
+        EventManagement.OnGameEndedWithWinner += HandleGameEnded;
     }
 
     private void OnDisable()
     {
-        EventManagement.OnTimerComplete -= OnTimerComplete;
+        EventManagement.OnRoundComplete -= HandleRoundComplete;
+        EventManagement.OnGameEndedWithWinner -= HandleGameEnded;
     }
 
-    private void OnTimerComplete()
+    private void HandleRoundComplete(string winnerId)
     {
-        if (MapManager.Instance.HasMoreRounds())
-        {
-            MapManager.Instance.AdvanceToNextRound();
-            EventManagement.SwitchToGameScreen?.Invoke();
-        }
-        else
-        {
-            GameManager.Instance.HandleFinalGameEnd();
-        }
+        /*TODO: add a screen with who won the game....
+        Right now going straight into the next round*/
+        MapManager.Instance.AdvanceToNextRound();
+        EventManagement.SwitchToGameScreen?.Invoke();
+    }
+
+    private void HandleGameEnded(string winnerId)
+    {
+        EventManagement.SwitchToGameOverScreen?.Invoke();
     }
 
     // --- מסך התחלה ---
@@ -34,6 +36,7 @@ public class UIManager : MonoBehaviour
     // --- מסך בחירת שמות ---
     public void OnNamePickStartBattlePressed()
     {
+        EventManagement.ResetPoints?.Invoke();
         MapManager.Instance.StartNewMatch();
         EventManagement.SwitchToGameScreen?.Invoke();
     }
@@ -58,6 +61,7 @@ public class UIManager : MonoBehaviour
     // --- מסך Game Over ---
     public void OnRestartPressed()
     {
+        //TODO: change to a soft restart instead of resetting the entire scene
         GameManager.Instance.RestartCurrentScene();
     }
 

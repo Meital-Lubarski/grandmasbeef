@@ -14,16 +14,18 @@ public abstract class EventManagement : MonoSingleton<EventManagement>
     
     //Events regarding the ammo limitation per round
     public static Action<string> OnPlayerShot;
-    public static Action<string, int> OnAmmoChanged;
     public static Action OnProjectileSpawned;
     public static Action OnProjectileResolved;
     
-    // Score changed
-    public static Action<int, int> OnScoreChanged;
-    
-    //Time management
+    //TODO: delete
+    public static Action<string, int> OnAmmoChanged;
     public static System.Action OnTimerComplete;
-    public static System.Action<string> OnGameEndedWithWinner;
+    
+    // Score changed
+    public static Action<int, int> OnScoreChanged; 
+    public static Action<string> OnRoundComplete;
+    public static Action<string> OnGameEndedWithWinner;
+    public static Action ResetPoints;
     
     // UI events
     public static Action SwitchToStartScreen;

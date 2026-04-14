@@ -2,72 +2,100 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
+    [Header("Game Settings")]
+    public int hitsToWinRound = 6;
+    public int roundsToWinGame = 2;
+    
     private const string Player1Id = "Player1";
     private const string Player2Id = "Player2";
-    private const string TieId = "Tie";
 
-    private int _player1Score;
-    private int _player2Score;
+    private int _player1RoundHits;
+    private int _player2RoundHits;
 
-    public int Player1Score => _player1Score;
-    public int Player2Score => _player2Score;
-
+    public int Player1MapWins { get; private set; }
+    public int Player2MapWins { get; private set; }
     private void OnEnable()
     {
         EventManagement.OnPlayerHit += HandlePlayerHit;
-        EventManagement.OnTimerComplete += HandleTimerComplete;
+        EventManagement.ResetPoints += ResetAllMatchScores;
     }
 
     private void OnDisable()
     {
         EventManagement.OnPlayerHit -= HandlePlayerHit;
-        EventManagement.OnTimerComplete -= HandleTimerComplete;
+        EventManagement.ResetPoints -= ResetAllMatchScores;
     }
 
     private void HandlePlayerHit(string hitPlayerId, Vector3 hitDirection)
     {
         if (hitPlayerId == Player1Id)
         {
-            _player2Score++;
+            _player2RoundHits++;
         }
         else if (hitPlayerId == Player2Id)
         {
-            _player1Score++;
+            _player1RoundHits++;
         }
 
         NotifyScoreChanged();
+        CheckRoundWinner();
     }
 
-    private void HandleTimerComplete()
+    private void CheckRoundWinner()
     {
-        string winnerId = GetWinnerId();
-        EventManagement.OnGameEndedWithWinner?.Invoke(winnerId);
+        if (_player1RoundHits >= hitsToWinRound)
+        {
+            HandleRoundEnd(Player1Id);
+        }
+        else if (_player2RoundHits >= hitsToWinRound)
+        {
+            HandleRoundEnd(Player2Id);
+        }
     }
-
-    private string GetWinnerId()
+    
+    //Adding win in a map to the current winner
+    private void HandleRoundEnd(string roundWinnerId)
     {
-        if (_player1Score > _player2Score)
+        if (roundWinnerId == Player1Id) Player1MapWins++;
+        else if (roundWinnerId == Player2Id) Player2MapWins++;
+        
+        //Reset hits toward the next map
+        ResetScores();
+        
+        //Checks if one of the players won 2 rounds already
+        if (Player1MapWins >= roundsToWinGame)
         {
-            return Player1Id;
+            EventManagement.OnGameEndedWithWinner?.Invoke(Player1Id);
         }
-
-        if (_player2Score > _player1Score)
+        else if (Player2MapWins >= roundsToWinGame)
         {
-            return Player2Id;
+            EventManagement.OnGameEndedWithWinner?.Invoke(Player2Id);
         }
-
-        return TieId;
+        else
+        {
+            //If no one won invoking going into the next round
+            EventManagement.OnRoundComplete?.Invoke(roundWinnerId);
+        }
     }
-
+    
     private void NotifyScoreChanged()
     {
-        EventManagement.OnScoreChanged?.Invoke(_player1Score, _player2Score);
+        EventManagement.OnScoreChanged?.Invoke(_player1RoundHits, _player2RoundHits);
+    }
+    private void ResetScores()
+    {
+        _player1RoundHits = 0;
+        _player2RoundHits = 0;
+        NotifyScoreChanged();
     }
 
-    public void ResetScores()
+    //This method is for starting a completely new game 
+    private void ResetAllMatchScores()
     {
-        _player1Score = 0;
-        _player2Score = 0;
+        _player1RoundHits = 0;
+        _player2RoundHits = 0;
+        Player1MapWins = 0;
+        Player2MapWins = 0;
         NotifyScoreChanged();
     }
 }

@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class AmmoUI : MonoBehaviour
+public class AmmoUIXXX : MonoBehaviour
 {
     [SerializeField] private TMP_Text player1AmmoText;
     [SerializeField] private TMP_Text player2AmmoText;
