@@ -20,7 +20,7 @@ public class Shooting : MonoBehaviour
     private bool _isCharging;
     private GameObject _currentProjectile;
     
-    private bool _canShoot = true;
+    private bool _canShoot = false;
     
     public bool IsCharging => _isCharging;
     public Transform ShootPoint => shootPoint;

@@ -8,6 +8,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject roundWinPanel; //panel for round winner
     [SerializeField] private TMP_Text roundWinnerText;
     [SerializeField] private float delayBeforeNextRound = 2f;
+    private void Start()
+    {
+        DisableShooting(); 
+    }
     private void OnEnable()
     {
         EventManagement.OnRoundComplete += HandleRoundComplete;
@@ -28,7 +32,7 @@ public class UIManager : MonoBehaviour
     //Coroutine for resetting players location and saying who is the winner in each round
     private IEnumerator ShowRoundWinAndContinue(string winnerId)
     {
-        EventManagement.SetShootingEnabled?.Invoke(false);
+        DisableShooting();
         string winnerName = PlayerPrefs.GetString(winnerId + "Name", winnerId);
         
         //turning on the winner canvas & text
@@ -42,7 +46,7 @@ public class UIManager : MonoBehaviour
         //Going into the next map and resetting the game
         MapManager.Instance.AdvanceToNextRound();
         
-        EventManagement.SetShootingEnabled?.Invoke(true);
+        EnableShooting();
         EventManagement.OnResetPositions?.Invoke(); 
         
         EventManagement.SwitchToGameScreen?.Invoke();
@@ -50,6 +54,7 @@ public class UIManager : MonoBehaviour
 
     private void HandleGameEnded(string winnerId)
     {
+        DisableShooting();
         EventManagement.SwitchToGameOverScreen?.Invoke();
     }
 
@@ -65,23 +70,27 @@ public class UIManager : MonoBehaviour
         EventManagement.ResetPoints?.Invoke();
         MapManager.Instance.StartNewMatch();
         EventManagement.SwitchToGameScreen?.Invoke();
+        EnableShooting();
     }
 
     // --- משחק (HUD) ---
     public void OnPausePressed()
     {
         EventManagement.SwitchToPauseScreen?.Invoke();
+        DisableShooting();
     }
 
     // --- תפריט עצירה ---
     public void OnResumePressed()
     {
         EventManagement.SwitchToGameScreen?.Invoke();
+        EnableShooting();
     }
 
     public void OnExitToStartPressed()
     {
         EventManagement.SwitchToStartScreen?.Invoke();
+        DisableShooting();
     }
 
     // --- מסך Game Over ---
@@ -96,5 +105,14 @@ public class UIManager : MonoBehaviour
     public void OnQuitPressed()
     {
         GameManager.QuitGame();
+    }
+
+    private void EnableShooting()
+    {
+        EventManagement.SetShootingEnabled?.Invoke(true);
+    }
+    private void DisableShooting()
+    {
+        EventManagement.SetShootingEnabled?.Invoke(false);
     }
 }
