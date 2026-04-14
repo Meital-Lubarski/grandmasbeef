@@ -5220,7 +5220,7 @@ MonoBehaviour:
   controlScheme: Player1
   projectilePrefab: {fileID: 918965486374535790, guid: 95639753c1bd3ad48acf55b6bfd844e6, type: 3}
   shootPoint: {fileID: 1427976283}
-  minLaunchForce: 1.1
+  minLaunchForce: 1.7
   maxLaunchForce: 15
   maxChargeTime: 7
 --- !u!114 &865022828
@@ -7161,7 +7161,6 @@ GameObject:
   - component: {fileID: 1186226603}
   - component: {fileID: 1186226602}
   - component: {fileID: 1186226601}
-  - component: {fileID: 1186226605}
   m_Layer: 5
   m_Name: CanvasGame
   m_TagString: Untagged
@@ -7257,21 +7256,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1186226605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1186226600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d96606d457dbcc44c8f325cd0eb6f775, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ScoreUI
-  player1ScoreText: {fileID: 1603166474}
-  player2ScoreText: {fileID: 605203157}
-  mapsScoreText: {fileID: 1692742371}
 --- !u!1 &1199972313
 GameObject:
   m_ObjectHideFlags: 0
@@ -10705,7 +10689,7 @@ MonoBehaviour:
   controlScheme: Player2
   projectilePrefab: {fileID: 918965486374535790, guid: 95639753c1bd3ad48acf55b6bfd844e6, type: 3}
   shootPoint: {fileID: 1597001048}
-  minLaunchForce: 1.1
+  minLaunchForce: 1.7
   maxLaunchForce: 15
   maxChargeTime: 7
 --- !u!114 &1751605931
@@ -11977,7 +11961,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ScoreUI
   player1ScoreText: {fileID: 1603166474}
   player2ScoreText: {fileID: 605203157}
-  mapsScoreText: {fileID: 0}
+  mapsScoreText: {fileID: 1692742371}
 --- !u!114 &1974541501
 MonoBehaviour:
   m_ObjectHideFlags: 0
