@@ -16,16 +16,14 @@ public abstract class EventManagement : MonoSingleton<EventManagement>
     public static Action<string> OnPlayerShot;
     public static Action OnProjectileSpawned;
     public static Action OnProjectileResolved;
-    
-    //TODO: delete
-    public static Action<string, int> OnAmmoChanged;
-    public static System.Action OnTimerComplete;
+    public static System.Action<bool> SetShootingEnabled;
     
     // Score changed
     public static Action<int, int> OnScoreChanged; 
     public static Action<string> OnRoundComplete;
     public static Action<string> OnGameEndedWithWinner;
     public static Action ResetPoints;
+    public static Action OnResetPositions;
     
     // UI events
     public static Action SwitchToStartScreen;
