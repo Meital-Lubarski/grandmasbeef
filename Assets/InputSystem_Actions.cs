@@ -1288,7 +1288,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""beb7aeb1-1152-4d60-97e9-1ec919b28760"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/rightShift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Player2"",
