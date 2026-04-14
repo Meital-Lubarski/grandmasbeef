@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
     private InputSystem_Actions _inputActions;
     private Vector2 _moveInput;
     
+    private Vector3 _startPosition;
+    private Quaternion _startRotation;
+    
     private Rigidbody2D _rb;
     
     public string PlayerId => controlScheme;
@@ -27,6 +30,13 @@ public class PlayerMovement : MonoBehaviour
         
         _rb = GetComponent<Rigidbody2D>();
     }
+    
+    private void Start()
+    { 
+        //saving the initial location of the players
+        _startPosition = transform.position;
+        _startRotation = transform.rotation;
+    }
 
     private void OnEnable()
     {
@@ -34,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
         
         _inputActions.PlayerMovement.Move.performed += OnMove;
         _inputActions.PlayerMovement.Move.canceled += OnMove;
+        
+        EventManagement.OnResetPositions += ResetPlayer;
     }
 
     private void OnDisable()
@@ -41,6 +53,8 @@ public class PlayerMovement : MonoBehaviour
         _inputActions.PlayerMovement.Move.performed -= OnMove;
         _inputActions.PlayerMovement.Move.canceled -= OnMove;        
         _inputActions.Disable();
+        
+        EventManagement.OnResetPositions -= ResetPlayer;
     }
 
     private void OnMove(InputAction.CallbackContext context)
@@ -69,6 +83,19 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector2 moveDirection = transform.up * (_moveInput.y * moveSpeed * Time.fixedDeltaTime);
             _rb.MovePosition(_rb.position + moveDirection);
+        }
+    }
+    
+    private void ResetPlayer()
+    { 
+        //Moving the player back into initial position
+        transform.position = _startPosition;
+        transform.rotation = _startRotation;
+    
+        if (_rb != null)
+        {
+            _rb.linearVelocity = Vector2.zero;
+            _rb.angularVelocity = 0f;
         }
     }
 }

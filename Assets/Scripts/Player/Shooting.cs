@@ -10,6 +10,7 @@ public class Shooting : MonoBehaviour
     [Header("Shooting Settings")]
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform shootPoint;
+    [Tooltip("Min should be not less than 1.6 - the player will hit himself")]
     [SerializeField] private float minLaunchForce = 4f;
     [SerializeField] private float maxLaunchForce = 14f;
     [SerializeField] private float maxChargeTime = 1.5f;
@@ -18,6 +19,8 @@ public class Shooting : MonoBehaviour
     private float _chargeStartTime;
     private bool _isCharging;
     private GameObject _currentProjectile;
+    
+    private bool _canShoot = false;
     
     public bool IsCharging => _isCharging;
     public Transform ShootPoint => shootPoint;
@@ -33,6 +36,8 @@ public class Shooting : MonoBehaviour
         _inputActions.Enable();
         _inputActions.PlayerMovement.Shoot.started += OnShootStarted;
         _inputActions.PlayerMovement.Shoot.canceled += OnShootCanceled;
+        
+        EventManagement.SetShootingEnabled += ToggleShooting;
     }
 
     private void OnDisable()
@@ -40,19 +45,18 @@ public class Shooting : MonoBehaviour
         _inputActions.PlayerMovement.Shoot.started -= OnShootStarted;
         _inputActions.PlayerMovement.Shoot.canceled -= OnShootCanceled;
         _inputActions.Disable();
+        
+        EventManagement.SetShootingEnabled -= ToggleShooting;
     }
 
+    private void ToggleShooting(bool isEnabled)
+    {
+        _canShoot = isEnabled;
+    }
     private void OnShootStarted(InputAction.CallbackContext context)
     {
-        //Checking for ammo available
-        if (!AmmoManager.Instance.CanPlayerShoot(controlScheme))
-        {
-            return;
-        }
-        if (_currentProjectile != null)
-        {
-            return;
-        }
+        if (!_canShoot) return;
+        if (_currentProjectile != null) return;
         _isCharging = true;
         _chargeStartTime = Time.time;
         EventManagement.OnSlingshotAimStarted?.Invoke();

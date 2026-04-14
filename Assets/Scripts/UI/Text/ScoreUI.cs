@@ -5,14 +5,10 @@ public class ScoreUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text player1ScoreText;
     [SerializeField] private TMP_Text player2ScoreText;
-
-    private string _player1Name;
-    private string _player2Name;
+    [SerializeField] private TMP_Text mapsScoreText;
     
     private void Start()
     {
-        _player1Name = PlayerPrefs.GetString("Player1Name", "Player 1");
-        _player2Name = PlayerPrefs.GetString("Player2Name", "Player 2");
         UpdateScoreUI(0, 0);
     }
     
@@ -26,9 +22,17 @@ public class ScoreUI : MonoBehaviour
         EventManagement.OnScoreChanged -= UpdateScoreUI;
     }
 
-    private void UpdateScoreUI(int player1Score, int player2Score)
+    private void UpdateScoreUI(int player1Hits, int player2Hits)
     {
-        player1ScoreText.text = $"{_player1Name} Score: {player1Score}";
-        player2ScoreText.text = $"{_player2Name} Score: {player2Score}";
+        string player1Name = PlayerPrefs.GetString("Player1Name", "Player 1");
+        string player2Name = PlayerPrefs.GetString("Player2Name", "Player 2");
+
+        player1ScoreText.text = player1Name + ": Hits: " + player1Hits + "/6";
+        player2ScoreText.text = player2Name + ": Hits: " + player2Hits + "/6";
+        
+        if (ScoreManager.Instance == null)
+            return;
+        
+        mapsScoreText.text = ScoreManager.Instance.Player1MapWins + " - " + ScoreManager.Instance.Player2MapWins;
     }
 }
