@@ -5,6 +5,7 @@ public class ScoreUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text player1ScoreText;
     [SerializeField] private TMP_Text player2ScoreText;
+    [SerializeField] private TMP_Text mapsScoreText;
 
     private string _player1Name;
     private string _player2Name;
