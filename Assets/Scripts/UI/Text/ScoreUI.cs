@@ -31,7 +31,8 @@ public class ScoreUI : MonoBehaviour
     private void UpdateScoreUI(int player1Hits, int player2Hits)
     {
         // מציג: שם שחקן | ניצחונות במפות: X | פגיעות בסיבוב: Y/6
-        player1ScoreText.text = $"{_player1Name}\nMaps Won: {ScoreManager.Instance.Player1MapWins}/2\nHits: {player1Hits}/6";
-        player2ScoreText.text = $"{_player2Name}\nMaps Won: {ScoreManager.Instance.Player2MapWins}/2\nHits: {player2Hits}/6";
+        player1ScoreText.text = _player1Name + ": Hits: " + player1Hits + "/6";
+        player2ScoreText.text = _player2Name + ": Hits: " + player2Hits + "/6";
+        mapsScoreText.text = ScoreManager.Instance.Player1MapWins + " - " + ScoreManager.Instance.Player2MapWins;
     }
 }
