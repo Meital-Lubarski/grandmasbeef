@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -29,6 +30,8 @@ public class Shooting : MonoBehaviour
     {
         _inputActions = new InputSystem_Actions();
         _inputActions.bindingMask = InputBinding.MaskByGroup(controlScheme);
+        
+        AssignPlayerDevices();
     }
 
     private void OnEnable()
@@ -96,5 +99,33 @@ public class Shooting : MonoBehaviour
     public void NotifyProjectileDestroyed()
     {
         _currentProjectile = null;
+    }
+    
+    //Assign ps4 controllers for each player based on their control scheme
+    private void AssignPlayerDevices()
+    {
+        List<InputDevice> myDevices = new List<InputDevice>();
+
+        if (Keyboard.current != null)
+        {
+            myDevices.Add(Keyboard.current);
+        }
+
+        if (Gamepad.all.Count > 0)
+        {
+            if (controlScheme == "Player1")
+            {
+                myDevices.Add(Gamepad.all[0]);
+            }
+            else if (controlScheme == "Player2" && Gamepad.all.Count > 1)
+            {
+                myDevices.Add(Gamepad.all[1]);
+            }
+        }
+        
+        if (myDevices.Count > 0)
+        {
+            _inputActions.devices = myDevices.ToArray();
+        }
     }
 }
