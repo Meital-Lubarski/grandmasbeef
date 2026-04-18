@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     {
         _inputActions = new InputSystem_Actions();
         _inputActions.bindingMask = InputBinding.MaskByGroup(controlScheme);
+        
+        AssignPlayerDevices();        
         
         _rb = GetComponent<Rigidbody2D>();
     }
@@ -96,6 +99,35 @@ public class PlayerMovement : MonoBehaviour
         {
             _rb.linearVelocity = Vector2.zero;
             _rb.angularVelocity = 0f;
+        }
+    }
+    private void AssignPlayerDevices()
+    {
+        List<InputDevice> myDevices = new List<InputDevice>();
+
+        // הוספת מקלדת כברירת מחדל
+        if (Keyboard.current != null)
+        {
+            myDevices.Add(Keyboard.current);
+        }
+
+        // הוספת שלטים לפי ה-Control Scheme
+        if (Gamepad.all.Count > 0)
+        {
+            if (controlScheme == "Player1")
+            {
+                myDevices.Add(Gamepad.all[0]);
+            }
+            else if (controlScheme == "Player2" && Gamepad.all.Count > 1)
+            {
+                myDevices.Add(Gamepad.all[1]);
+            }
+        }
+
+        // עדכון המכשירים ב-Input Actions
+        if (myDevices.Count > 0)
+        {
+            _inputActions.devices = myDevices.ToArray();
         }
     }
 }
