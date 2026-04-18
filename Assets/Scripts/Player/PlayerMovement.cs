@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     {
         _inputActions = new InputSystem_Actions();
         _inputActions.bindingMask = InputBinding.MaskByGroup(controlScheme);
+        
+        InputDeviceHelper.AssignPlayerDevices(_inputActions, controlScheme);     
         
         _rb = GetComponent<Rigidbody2D>();
     }

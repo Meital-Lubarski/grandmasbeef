@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -29,6 +30,9 @@ public class Shooting : MonoBehaviour
     {
         _inputActions = new InputSystem_Actions();
         _inputActions.bindingMask = InputBinding.MaskByGroup(controlScheme);
+        
+        //Assign ps4 controllers for each player based on their control scheme
+        InputDeviceHelper.AssignPlayerDevices(_inputActions, controlScheme);
     }
 
     private void OnEnable()
