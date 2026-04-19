@@ -1,14 +1,14 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class PortraitAnimationController : MonoBehaviour
 {
     private static readonly int PlayerHit = Animator.StringToHash("PlayerHit");
-    [SerializeField] private Animator player1Animator;
-    [SerializeField] private Animator player2Animator;
-    private const string Player1Id = "Player1";
-    private const string Player2Id = "Player2";
-
+    
+    private enum PlayerPortrait { Player1, Player2 }
+    [SerializeField] private PlayerPortrait selectedPlayer;
+    [SerializeField] private Animator animator;
     private void OnEnable()
     {
         EventManagement.OnPlayerHit += ActivateHitTrigger;
@@ -21,21 +21,12 @@ public class PortraitAnimationController : MonoBehaviour
     
     private void ActivateHitTrigger(string hitPlayerId, Vector3 hitDirection)
     {
-        if (hitPlayerId == Player1Id)
+        if (selectedPlayer.ToString().Equals(hitPlayerId, StringComparison.OrdinalIgnoreCase))
         {
-            HitPlayer(player1Animator);
-        }
-        else if (hitPlayerId == Player2Id)
-        {
-            HitPlayer(player2Animator);
-        }
-    }
-
-    private void HitPlayer(Animator playerAnimator)
-    {
-        if (playerAnimator != null)
-        {
-            playerAnimator.SetTrigger(PlayerHit);
+            if (animator != null)
+            {
+                animator.SetTrigger(PlayerHit);
+            }
         }
     }
 }
