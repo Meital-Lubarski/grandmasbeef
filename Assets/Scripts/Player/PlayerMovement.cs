@@ -90,15 +90,22 @@ public class PlayerMovement : MonoBehaviour
     }
     
     private void ResetPlayer()
-    { 
-        //Moving the player back into initial position
-        transform.position = _startPosition;
-        transform.rotation = _startRotation;
-    
+    {
         if (_rb != null)
         {
             _rb.linearVelocity = Vector2.zero;
             _rb.angularVelocity = 0f;
+
+            _rb.position = _startPosition;
+            _rb.rotation = _startRotation.eulerAngles.z;
+
+            _rb.Sleep();
+            _rb.WakeUp();
+        }
+        else
+        {
+            transform.position = _startPosition;
+            transform.rotation = _startRotation;
         }
     }
 }

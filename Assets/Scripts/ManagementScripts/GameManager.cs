@@ -3,9 +3,20 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+    public static bool StartGameImmediately = false;
+
     private void Start()
     {
-        EventManagement.SwitchToStartScreen?.Invoke();
+        if (StartGameImmediately)
+        {
+            StartGameImmediately = false;
+            EventManagement.SwitchToGameScreen?.Invoke();
+            EventManagement.SetShootingEnabled?.Invoke(true);
+        }
+        else
+        {
+            EventManagement.SwitchToStartScreen?.Invoke();
+        }
     }
 
     private void OnEnable()

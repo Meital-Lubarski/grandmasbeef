@@ -5,19 +5,23 @@ public class ShootingHit : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D other)
     {
-        PlayerHitEffect hitEffect = other.collider.GetComponent<PlayerHitEffect>();
-        PlayerMovement playerMovement = other.collider.GetComponent<PlayerMovement>();
+        PlayerHitEffect hitEffect = other.collider.GetComponentInParent<PlayerHitEffect>();
+        PlayerMovement playerMovement = other.collider.GetComponentInParent<PlayerMovement>();
 
-        if (hitEffect != null && playerMovement != null)
+        if (playerMovement != null)
         {
             string hitPlayerId = playerMovement.PlayerId;
             Debug.Log("Hit the player: " + hitPlayerId);
-            
-            Vector3 hitDirection = transform.up; 
-            hitEffect.TakeHit(hitDirection); 
-            
+
+            Vector3 hitDirection = transform.up;
+
+            if (hitEffect != null)
+            {
+                hitEffect.TakeHit(hitDirection);
+            }
+
             EventManagement.OnPlayerHit?.Invoke(hitPlayerId, hitDirection);
-            
+
             Destroy(gameObject);
         }
     }
