@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 1423359891}
   - component: {fileID: 1423359890}
   - component: {fileID: 1423359889}
+  - component: {fileID: 1423359892}
   m_Layer: 0
   m_Name: GrandmaProtrait1
   m_TagString: Untagged
@@ -233,6 +234,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1423359892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423359888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0c2794a18adc9408ea6efa14d49b0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PortraitAnimationController
+  selectedPlayer: 0
+  animator: {fileID: 1423359889}
 --- !u!1 &1634382131
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +351,7 @@ GameObject:
   - component: {fileID: 1651465509}
   - component: {fileID: 1651465508}
   - component: {fileID: 1651465510}
+  - component: {fileID: 1651465511}
   m_Layer: 0
   m_Name: GrandmaProtrait2
   m_TagString: Untagged
@@ -439,6 +455,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1651465511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651465507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0c2794a18adc9408ea6efa14d49b0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PortraitAnimationController
+  selectedPlayer: 1
+  animator: {fileID: 1651465510}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
